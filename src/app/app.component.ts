@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Task} from "./entity/task";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular';
+  title = 'DemoAngRestful';
+
+  task: Task = new Task;
+
+  constructor(private http: HttpClient) {
+    this.http.get<Task>('http://localhost:8080/task').subscribe(result => {
+      this.task = result;
+    });
+  }
+
+
 }
